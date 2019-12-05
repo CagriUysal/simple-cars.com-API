@@ -8,7 +8,7 @@ def info_parser(car_info):
   of the car is parsed and written to a dictionary.
 
   Parameters: 
-  car_info(bs4.element.Tag): details <div> with a class attribute of `listing-row__details`
+  car_info(bs4.element.Tag): <div> with a class attribute of `listing-row__details`
   from cars.com
   
   Returns:
@@ -63,12 +63,40 @@ def info_parser(car_info):
 
   return car_dic
 
-if __name__ == '__main__':
-  page = requests.get("https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20005&page=1&perPage=50&searchSource=GN_REFINEMENT&sort=relevance&zc=90006")
+def get_cars_info(url, car_number=50, verbose=False):
+  '''
+  Fetch information from given url for given number of cars
 
+  Parameters:
+  url(string): cars.com url, contains information of cars for given brand
+  car_number(int): number of cars info to fetch
+  verbose(bool): make me speak
+
+  Returns:
+  List: contains information as array of dictionaries
+  '''
+  url = url + '&perPage=' + str(car_number)
+  page = requests.get(url)
   soup = BeautifulSoup(page.content, 'html.parser')
+  
+  cars_info = soup.find_all('div', attrs={'class': 'listing-row__details'})
+  
+  info_list = []
+  for info in cars_info:
+    parsed = info_parser(info) 
+    info_list.append(parsed)
+    if verbose:
+      print('{}. car appended: {}'.format(len(info_list), parsed['model'])) 
 
-  # div for individual car information
-  car_info = soup.find('div', attrs={'class': 'listing-row__details'})
-  dic = info_parser(car_info)
-  print(dic)
+  return info_list
+
+if __name__ == '__main__':
+  bmw_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20005&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006'
+  ford_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20015&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006' 
+
+  bmw_list = get_cars_info(bmw_url, 5, verbose=True)
+  ford_list = get_cars_info(ford_url, 5)
+
+  # Take a look a samples
+  print('BMW: ', bmw_list[0], end='\n')
+  print('FORD:', ford_list[0])
