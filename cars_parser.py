@@ -83,11 +83,11 @@ def get_cars_info(url, car_number=50, verbose=False):
   cars_info = soup.find_all('div', attrs={'class': 'listing-row__details'})
   
   info_list = []
-  for info in cars_info:
+  for i, info in enumerate(cars_info):
     parsed = info_parser(info) 
     info_list.append(parsed)
     if verbose:
-      print('{}. car appended: {}'.format(len(info_list), parsed['model'])) 
+      print('{}. car appended: {}'.format(i+1, parsed['model'])) 
 
   return info_list
 
@@ -99,5 +99,5 @@ if __name__ == '__main__':
   ford_list = get_cars_info(ford_url, 50)
 
   # Take a look a samples
-  print('BMW: ', bmw_list[19])
+  print('BMW: ', bmw_list[19]) # private seller without contact
   print('FORD:', ford_list[0])
