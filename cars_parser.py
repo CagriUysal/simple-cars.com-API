@@ -57,8 +57,9 @@ def info_parser(car_info):
 
   # contact number is in div with class listing-row__phone
   contact = car_info.find('div', attrs={'class':'listing-row__phone'})
-  # contact has few span child in it, only the last child contains number
-  contact = contact.findChildren('span', recursive=False)[-1].text
+  # contact has few span child in it, only the last child contains number,
+  # for private sellers contact returns None, I choose to put string "-1" for those
+  contact = contact.findChildren('span', recursive=False)[-1].text if contact else '-1'
   car_dic['contact'] = contact
 
   return car_dic
@@ -94,9 +95,9 @@ if __name__ == '__main__':
   bmw_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20005&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006'
   ford_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20015&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006' 
 
-  bmw_list = get_cars_info(bmw_url, 5, verbose=True)
-  ford_list = get_cars_info(ford_url, 5)
+  bmw_list = get_cars_info(bmw_url, 50, verbose=True)
+  ford_list = get_cars_info(ford_url, 50)
 
   # Take a look a samples
-  print('BMW: ', bmw_list[0], end='\n')
+  print('BMW: ', bmw_list[19])
   print('FORD:', ford_list[0])
