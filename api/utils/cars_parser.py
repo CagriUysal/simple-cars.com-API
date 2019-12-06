@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup 
 
 def info_parser(car_info):
-  '''
+  """
   parse requested information for given car,
   price, model, external color, internal color, tranmission type, price and contact 
   of the car is parsed and written to a dictionary.
@@ -13,7 +13,7 @@ def info_parser(car_info):
   
   Returns:
   Dictionary: a dictionary that holds concerned information 
-  '''
+  """
   car_dic = {}
 
   # price has following form
@@ -65,7 +65,7 @@ def info_parser(car_info):
   return car_dic
 
 def get_cars_info(url, car_number=50, verbose=False):
-  '''
+  """
   Fetch information from given url for given number of cars
 
   Parameters:
@@ -75,7 +75,7 @@ def get_cars_info(url, car_number=50, verbose=False):
 
   Returns:
   List: contains information as array of dictionaries
-  '''
+  """
   url = url + '&perPage=' + str(car_number)
   page = requests.get(url)
   soup = BeautifulSoup(page.content, 'html.parser')
