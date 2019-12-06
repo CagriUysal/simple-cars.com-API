@@ -48,11 +48,11 @@ def info_parser(car_info):
 
   ext_color = ul_childs[0].text
   ext_color = ext_color.replace('Ext. Color:', '').strip() 
-  car_dic['ext color'] = ext_color
+  car_dic['ext_color'] = ext_color
 
   int_color = ul_childs[1].text
   int_color = int_color.replace('Int. Color:', '').strip() 
-  car_dic['int color'] = int_color
+  car_dic['int_color'] = int_color
 
   transmission = ul_childs[2].text
   transmission = transmission.replace('Transmission:', '').strip()
@@ -94,6 +94,7 @@ def get_cars_info(url, car_number=50, verbose=False):
 
   return info_list
 
+'''
 if __name__ == '__main__':
   bmw_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20005&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006'
   ford_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20015&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006' 
@@ -104,3 +105,4 @@ if __name__ == '__main__':
   # Take a look a samples
   print('BMW: ', bmw_list[19]) # private seller without contact
   print('FORD:', ford_list[0])
+'''
