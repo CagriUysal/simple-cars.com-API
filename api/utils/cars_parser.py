@@ -48,15 +48,15 @@ def info_parser(car_info):
 
   ext_color = ul_childs[0].text
   ext_color = ext_color.replace('Ext. Color:', '').strip() 
-  car_dic['ext_color'] = ext_color
+  car_dic['ext_color'] = ext_color.lower()
 
   int_color = ul_childs[1].text
   int_color = int_color.replace('Int. Color:', '').strip() 
-  car_dic['int_color'] = int_color
+  car_dic['int_color'] = int_color.lower()
 
   transmission = ul_childs[2].text
   transmission = transmission.replace('Transmission:', '').strip()
-  car_dic['transmission'] = transmission
+  car_dic['transmission'] = transmission.lower()
 
   # contact number is in div with class listing-row__phone
   contact = car_info.find('div', attrs={'class':'listing-row__phone'})
