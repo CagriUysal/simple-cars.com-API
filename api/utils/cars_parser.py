@@ -24,12 +24,15 @@ def info_parser(car_info):
 
   # year and model contained in h2 element
   # h2 is in the form
-  # <h2> ${year} {brand} {model}</h2>, where we want year and model
+  # <h2> ${year} {brand} {model}</h2>
   h2 = car_info.find('h2').text
   h2 = h2.split()
 
   year = h2[0] # first word is the year
   car_dic['year'] = year
+
+  brand = h2[1]
+  car_dic['brand'] = brand
 
   model = ' '.join(h2[2:]) # after brand take everything as model
   car_dic['model'] = model 
