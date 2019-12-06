@@ -93,16 +93,3 @@ def get_cars_info(url, car_number=50, verbose=False):
       print('{}. car appended: {}'.format(i+1, parsed['model'])) 
 
   return info_list
-
-'''
-if __name__ == '__main__':
-  bmw_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20005&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006'
-  ford_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20015&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006' 
-
-  bmw_list = get_cars_info(bmw_url, 50, verbose=True)
-  ford_list = get_cars_info(ford_url, 50)
-
-  # Take a look a samples
-  print('BMW: ', bmw_list[19]) # private seller without contact
-  print('FORD:', ford_list[0])
-'''
