@@ -2,16 +2,17 @@ from .cars_parser import info_parser, get_cars_info
 from ..models import Car
 
 def main():
-  bmw_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20005&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006'
-  ford_url = 'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId=20015&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006' 
-
-  # get 50 cars information for both BMW and Ford
-  print('Fetching BMW ....')
-  bmw_list = get_cars_info(bmw_url, 50)
-  print('Fetching Ford ....')
-  ford_list = get_cars_info(ford_url, 50) 
-
-  cars_list = bmw_list + ford_list 
+  
+  cars_config = {
+    'bmw': 20005,
+    'ford': 20015
+  }
+  
+  cars_list = []
+  for car_name, car_id in cars_config.items():
+    url = f'https://www.cars.com/for-sale/searchresults.action/?dealerType=localOnly&mkId={car_id}&page=1&searchSource=GN_REFINEMENT&sort=relevance&zc=90006'
+    print(f'Fething {car_name})
+    cars_list.append(get_cars_info(url, 50))
 
   print('Writing to database ....')
   for car in cars_list:
